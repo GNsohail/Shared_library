@@ -1,3 +1,5 @@
+#!/usr/bin/env groovy
+def call(String gitrep, String branchname) {
 pipeline {
     agent any
     stages {
@@ -6,10 +8,11 @@ steps {
   //echo 'Hello World'
 
   //sayHello 'Dave'
-  checkOutstp "https://github.com/GNsohail/Shared_library.git","main" 
+  checkout([$class: 'GitSCM', branches: [[name: "*/${branchname}"]], extensions: [], userRemoteConfigs: [[url: "${gitrep}"]]]) 
   sh 'ls vars/'
 }
 }
 
+}
 }
 }
